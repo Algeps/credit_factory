@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Завки на кредит от пользователей</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+    </header>
+    <section>
+        <a th:href="@{/{user}(user = ${current.getUserRole().toString().toLowerCase()})}">К профилю</a>
+        <form th:action="@{/{user}/list_apps_credit(user = ${current.getUserRole().toString().toLowerCase()})}">
+            <h2 class="centerPage">Список заявок на кредит
+                <input type="submit" value="Обновить">
+            </h2>
+        </form>
+    </section>
+    <section>
+        <table class="table_info">
+            <thead>
+                <tr>
+                    <th scope="col">Номер</th>
+                    <th scope="col">Статус заявки</th>
+                    <th scope="col">Сумма кредита(рублей)</th>
+                    <th scope="col">Срок(месяцев)</th>
+                    <th scope="col">Годовая процентная ставка(%)</th>
+                    <th scope="col">Цель кредита</th>
+                    <th scope="col">Указанный месячный доход(рублей)</th>
+                    <th scope="col">Дата и время заявки</th>
+                    <th scope="col">Фамилия клиента</th>
+                    <th scope="col">Дата рождения клиента</th>
+                    <th scope="col">Изменить статус заявки</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${#lists.isEmpty(apps_credit)}">
+                    <td>Нет записей</td>
+                </tr>
+                <tr th:each="app_credit : ${apps_credit}">
+                    <td th:text="${app_credit. getId()}"></td>
+                    <td th:text="${app_credit.getDisplayStatus()}"></td>
+                    <td th:text="${app_credit.getTotalSumLoan()}"></td>
+                    <td th:text="${app_credit.getLoanTerm()}"></td>
+                    <td th:text="${app_credit.getLoanAnnualRate()}"></td>
+                    <td th:text="${app_credit.getPurposeOfLoan()}"></td>
+                    <td th:text="${app_credit.getMonthlyIncome()}"></td>
+                    <td th:text="${#temporals.format(app_credit.getCreationAt(), 'HH:mm:ss dd-MM-yyyy')}"></td>
+                    <td th:text="${app_credit.getClient().getLastName()}"></td>
+                    <td th:text="${#temporals.format(app_credit.getCreationAt(), 'yyyy-MM-dd')}"></td>
+                    <td><a th:href="@{/{user}/edit_app_credit/{id}(id = ${app_credit.getId()},
+                    user = ${current.getUserRole().toString().toLowerCase()})}">Редактировать</a>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

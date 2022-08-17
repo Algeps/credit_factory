@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница администратора</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div>
+            <form th:action="@{/logout}" method="post" style="display: flex; justify-content: space-between; align-items: center">
+                <span style="text-align: left">Кредитная организация ""</span>
+                <input type="submit" value="Выйти">
+            </form>
+        </div>
+        <hr>
+    </header>
+    <section>
+        <h2 class="centerPage">Страница администратора</h2>
+        <a th:href="@{/admin/users_list}">Список всех пользователей</a>
+        <br>
+        <a th:href="@{/admin/list_apps_credit}">Список всех заявок</a>
+    </section>
+</body>
+</html>

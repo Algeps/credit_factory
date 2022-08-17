@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div>
+            <form th:action="@{/logout}" method="post" style="display: flex; justify-content: space-between; align-items: center">
+                <a th:href="@{/home}" style="font-size: 2rem" >Кредитная организация ""</a>
+                <button type="submit">Выйти</button>
+            </form>
+        </div>
+        <hr>
+    </header>
+    <section>
+        <h1 class="centerPage">Личный кабинет</h1>
+        <h1 th:inline="text">Здравствуйте, <span th:text="${user.getFirstName()} + ' ' +  ${user.getLastName()}">!</span>
+        </h1>
+        <br>
+        <a th:href="@{/client/app_credit/new}">Создать новую заявку</a>
+        <a th:href="@{/client/apps_credit}">Список заявок</a>
+    </section>
+</body>
+</html>

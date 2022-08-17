@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Главная страница</title>
+    </head>
+    <body>
+        <h1 class="centerPage">Кредитная организация ""</h1>
+
+        <form class="centerPage">
+            <div> Уже есть аккаунт? <a th:href="@{/profile_client}">Войти</a> </div>
+        <br>
+            <div> Нет аккаунта? <a th:href="@{/registration}">Регистрация</a> </div>
+        </form>
+    </body>
+</html>
+
+<style>
+    .centerPage {
+        text-align: center;
+    }
+</style>

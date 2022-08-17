@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание новой заявки</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div>
+            <form th:action="@{/logout}" method="post" style="display: flex; justify-content: space-between; align-items: center">
+                <span style="font-size: 2rem">Кредитная организация ""</span>
+                <button type="submit">Выйти</button>
+            </form>
+        </div>
+        <hr>
+    </header>
+    <section>
+        <a th:href="@{/client}">К профилю</a>
+    </section>
+    <section class="form form_add_app_credit">
+        <div class="form__container">
+            <form class="centerPage" th:method="POST" th:action="@{/client/app_credit/new}" th:object="${app_credit}">
+                <h2>Создать заявку на кредит</h2>
+                <div class="form_group">
+                    <label for="totalSumLoan">Сумма кредита</label>
+                    <input type="number" id="totalSumLoan" th:field="*{totalSumLoan}" min="10000" max="1000000"
+                               placeholder="Введите сумму" required value>
+                </div>
+                <div class="form_group">
+                    <label for="loanTerm">Количество месяцев</label>
+                    <input type="number" id="loanTerm" th:field="*{loanTerm}" min="12" max="60"
+                           placeholder="Введите количество месяцев" required value>
+                </div>
+                <div class="form_group">
+                    <label for="loanAnnualRate">Процентная ставка</label>
+                    <input type="number" id="loanAnnualRate" th:field="*{loanAnnualRate}" min="7" max="30"
+                           placeholder="Введите процентную ставку" required value>
+                </div>
+                <div class="form_group">
+                    <label for="purposeOfLoan">Цель кредита</label>
+                    <input type="text" id="purposeOfLoan" th:field="*{purposeOfLoan}" placeholder="Цель кредита"
+                           required value>
+                </div>
+                <div class="form_group">
+                    <label for="monthlyIncome">Ежемесячный доход</label>
+                    <input type="number" id="monthlyIncome" th:field="*{monthlyIncome}" min="15000"
+                           placeholder="Введите ежемесячный доход" required value>
+                </div>
+                <div class="form_group">
+                    <input type="reset" value="Очистить поля">
+                    <input type="submit" value="Посчитать ежемесячный платёж">
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <a th:href="@{/admin}">К профилю</a>
+        <form th:action="@{/admin/users_list}">
+            <h2 class="centerPage">Список всех пользователей
+                <input type="submit" value="Обновить">
+            </h2>
+        </form>
+    </section>
+    <section>
+        <table class="table_info">
+            <thead>
+            <tr>
+                <th scope="col">Номер</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Дата рождения</th>
+                <th scope="col">Роль пользователя</th>
+                <th scope="col">Действия над пользователем</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(users)}">
+                <td>Нет записей</td>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getLastName()}"></td>
+                <td th:text="${user.getFirstName()}"></td>
+                <td th:text="${user.getPatronymic()}"></td>
+                <td th:text="${#temporals.format(user.getDateOfBirth(), 'dd-MM-yyyy')}"></td>
+                <td th:text="${user.getDisplayUserRole()}"></td>
+                <td><a th:href="@{/admin/user/{id}(id = ${user.getId()})}">Редактировать</a>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

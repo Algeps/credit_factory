@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заявок</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h2>Кредитная организация ""</h2>
+        <form th:action="@{/logout}" method="post" style="text-align: end">
+            <button type="submit">Выйти</button>
+        </form>
+        <hr>
+    </header>
+    <a th:href="@{/client}">К профилю</a>
+        <h2 class="centerPage">Список заявок</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th scope="col">Номер</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Сумма кредита(рублей)</th>
+                    <th scope="col">Срок(месяцев)</th>
+                    <th scope="col">Годовая процентная ставка(%)</th>
+                    <th scope="col">Цель кредита</th>
+                    <th scope="col">Указанный месячный доход</th>
+                    <th scope="col">Дата заявки</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${#lists.isEmpty(apps_credit)}">
+                    <td>Нет записей</td>
+                </tr>
+                <tr th:each="app_credit : ${apps_credit}">
+                    <td th:text="${app_credit.getId()}"></td>
+                    <td th:text="${app_credit.getDisplayStatus()}"></td>
+                    <td th:text="${app_credit.getTotalSumLoan()}"></td>
+                    <td th:text="${app_credit.getLoanTerm()}"></td>
+                    <td th:text="${app_credit.getLoanAnnualRate()}"></td>
+                    <td th:text="${app_credit.getPurposeOfLoan()}"></td>
+                    <td th:text="${app_credit.getMonthlyIncome()}"></td>
+                    <td th:text="${#temporals.format(app_credit.getCreationAt(), 'HH:mm:ss dd-MM-yyyy')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

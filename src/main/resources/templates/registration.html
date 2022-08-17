@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+    <body>
+        <h1 class="centerPage">Кредитная организация ""</h1>
+
+        <div class="centerPage">
+            <form th:action="@{/registration}" method="post">
+                <h2 >Регистрация нового пользователя</h2>
+                <input type="text" name="firstName" placeholder="Имя" required="" autofocus=""><br>
+                <input type="text" name="lastName" placeholder="Фамилия" required="" autofocus=""><br>
+                <input type="text" name="surName" placeholder="Отчество" required="" autofocus=""><br>
+                Дата Рождения:
+                <input type="date" name="dateOfBirth" required="" autofocus=""><br>
+                <input type="text" name="userName"  placeholder="Логин" required="" autofocus=""><br>
+                <input type="password" name="password1"  placeholder="Пароль" required=""
+                       autofocus=""><br>
+                <input type="password" name="password2" placeholder="Повторите пароль" required=""
+                       autofocus=""><br>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <div role="alert" th:if="${!passMatch}">Введённые пароли не совпадают!</div>
+            <div  role="alert" th:if="${userExist}">Пользователь с таким логином уже существует!
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+    .centerPage {
+        text-align: center;
+    }
+</style>

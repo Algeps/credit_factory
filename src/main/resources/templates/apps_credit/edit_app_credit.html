@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение статуса заявки</title>
+</head>
+<body>
+        <h2 align="center">Изменение статуса заявки</h2>
+        <a th:href="@{/{user}/list_apps_credit(user = ${current.getUserRole().toString().toLowerCase()})}">К заявкам</a>
+        <form th:method="POST" th:action="@{/{user}/app_credit/{id}(id = ${app_credit.getId()},
+                user = ${current.getUserRole().toString().toLowerCase()})}"
+              th:object="${app_credit}">
+            <table border="1">
+                <thead>
+                <tr>
+                    <th scope="col">Номер</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Сумма кредита(рублей)</th>
+                    <th scope="col">Срок(месяцев)</th>
+                    <th scope="col">Годовая процентная ставка(%)</th>
+                    <th scope="col">Цель кредита</th>
+                    <th scope="col">Указанный месячный доход</th>
+                    <th scope="col">Дата заявки</th>
+                    <th scope="col">ФИО клиента</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="app_credit : ${app_credit}">
+                    <td th:text="${app_credit.getId()}" id="id"></td>
+                    <!-- -->
+                    <td>
+                        <label for="applicationStatus"></label>
+                        <select name="applicationStatus" th:field="*{applicationStatus}" id="applicationStatus">
+                            <option th:each="app_credit_status : ${appStatusList}" th:value="${app_credit_status}"
+                                    th:text="${app_credit_status.getStringStatus()}">Status
+                            </option>
+                        </select>
+                    </td>
+                    <!-- -->
+                    <td th:text="${app_credit.getTotalSumLoan()}"></td>
+                    <td th:text="${app_credit.getLoanTerm()}"></td>
+                    <td th:text="${app_credit.getLoanAnnualRate()}"></td>
+                    <td th:text="${app_credit.getPurposeOfLoan()}"></td>
+                    <td th:text="${app_credit.getMonthlyIncome()}"></td>
+                    <td th:text="${#temporals.format(app_credit.getCreationAt(), 'HH:mm:ss dd-MM-yyyy')}"></td>
+                    <td th:text="${app_credit.getClient().getLastName()}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit">Сохранить</button>
+        </form>
+</body>
+</html>

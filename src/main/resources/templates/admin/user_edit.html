@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+    </header>
+    <section>
+        <a th:href="@{/admin/users_list}">К списку пользователей</a>
+    </section>
+    <section class="form">
+        <div class="form__container">
+            <form th:method="POST" th:action="@{/admin/user/{id}(id = ${user.getId()})}" th:object="${user}">
+                <h2 class="centerPage">Редактирование пользователя</h2>
+                <div class="form_group">
+                    <label for="lastName">Фамилия</label>
+                    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Введите новую фамилию" required>
+                </div>
+                <br>
+                <div class="form_group">
+                    <label for="firstName">Имя</label>
+                    <input type="text" th:field="*{firstName}" id="firstName" placeholder="Введите новое имя"
+                           required>
+                </div>
+                <br>
+                <div class="form_group">
+                    <label for="patronymic">Отчество</label>
+                    <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Введите новое отчество"
+                           required>
+                </div>
+                <br>
+                <div class="form_group">
+                    <label for="userRole">Роль пользователя</label>
+                    <select name="userRole" th:field="*{userRole}" id="userRole" >
+                        <option th:each="userRole : ${T(ru.sber.edu.credit_factory.enums.UserRole).values()}"
+                                th:value="${userRole}" th:text="${userRole.getStringUserRole()}">Изменить роль пользователя
+                        </option>
+                    </select>
+                </div>
+                <br>
+                <div class="form_group">
+                    <label for="login">Логин</label>
+                    <input type="text" th:field="*{login}" id="login" placeholder="Логин" required>
+                    <br>
+                </div>
+                <br>
+                <div class="form_group">
+                    <div>
+                        <input type="checkbox" name="changePassword" id="changePassword">
+                        <label for="changePassword">Новый пароль</label>
+                    </div>
+                    <label for="newPassword"></label>
+                    <input type="password" placeholder="Новый пароль" name="newPassword" id="newPassword">
+                </div>
+                <br>
+                <div class="form_group">
+                    <button type="submit" >Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
